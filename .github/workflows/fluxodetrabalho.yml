@@ -1,0 +1,33 @@
+name: Publish Python 🐍 package
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  publish:
+    name: Build and publish to PyPI
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Install Poetry
+      run: pip install poetry
+
+    - name: Install dependencies
+      run: poetry install --no-root
+
+    - name: Build package
+      run: poetry build
+
+    - name: Publish to PyPI
+      env:
+        POETRY_PYPI_TOKEN_PYPI: ${{ secrets.tempo_pypack }}
+      run: poetry publish --username __token__ --password $POETRY_PYPI_TOKEN_PYPI
