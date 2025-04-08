@@ -1,7 +1,7 @@
 [project]
 name = "tempo-pypack"
 version = "0.1.0"
-description = ""
+description = "Python library for tracking runtime and monitoring loop progress."
 authors = [
     {name = "Henrique Reis ",email = "henrique.hrf@outlook.com"}
 ]
